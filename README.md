@@ -1,5 +1,8 @@
 ### Build status
+#### Master branch
 [![CircleCI](https://circleci.com/gh/trungduyvu/vudo-web-client/tree/master.svg?style=svg)](https://circleci.com/gh/trungduyvu/vudo-web-client/tree/master)
+
+#### Dev branch
 [![CircleCI](https://circleci.com/gh/trungduyvu/vudo-web-client/tree/dev.svg?style=svg)](https://circleci.com/gh/trungduyvu/vudo-web-client/tree/dev)
 
 ### Overview
