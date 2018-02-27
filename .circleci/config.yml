@@ -95,3 +95,22 @@ workflows:
                             - dev
                             - master
                             - /features\/.*/
+            - build:
+                context: org-global
+                requires:
+                    - install
+                filters:
+                    branches:
+                        only:
+                            - dev
+                            - master
+            - deploy:
+                context: org-global
+                requires:
+                    - build
+                    - test
+                filters:
+                    branches:
+                        only:
+                            - dev
+                            - master
