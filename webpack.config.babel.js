@@ -1,26 +1,31 @@
 import path from 'path';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 
-import { WDS_PORT } from './src/config';
+import { WDS_PORT, IS_PROD } from './src/config';
 
 export default {
   entry: [
     './src',
   ],
   output: {
-    filename: 'js/bundle.js',
     path: path.resolve(__dirname, 'dist'),
-    publicPath: `http://localhost:${WDS_PORT}/dist/`,
+    filename: 'bundle.[hash].js',
   },
   module: {
     rules: [
       { test: /\.(js|jsx)$/, use: 'babel-loader', exclude: /node_modules/ },
     ],
   },
-  devtool: 'source-map',
+  devtool: IS_PROD ? false : 'source-map',
   resolve: {
     extensions: ['.js', '.jsx'],
   },
   devServer: {
     port: WDS_PORT,
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: 'index.html',
+    }),
+  ],
 };
