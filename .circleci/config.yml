@@ -4,73 +4,73 @@
 #
 
 defaults: &defaults
-  docker:
-    # specify the version you desire here
-    - image: circleci/node:7.10
+    docker:
+      # specify the version you desire here
+      - image: circleci/node:7.10
 
 version: 2
 
 jobs:
-  install:
-    <<: *defaults
+    install:
+        <<: *defaults
 
-    steps:
-      - checkout
+        steps:
+            - checkout
 
-      # Download and cache dependencies
-      - restore_cache:
-        keys:
-        - v1-dependencies-{{ checksum "package.json" }}
-        - v1-dependencies-
+            # Download and cache dependencies
+            - restore_cache:
+                keys:
+                    - v1-dependencies-{{ checksum "package.json" }}
+                    - v1-dependencies-
 
-      - run: yarn install
+            - run: yarn install
 
-      - save_cache:
-        paths:
-          - node_modules
-        key: v1-dependencies-{{ checksum "package.json" }}
+            - save_cache:
+                paths:
+                    - node_modules
+                key: v1-dependencies-{{ checksum "package.json" }}
 
-      # Persist the specified paths into workspace for use in downstream job.
-      - persist_to_workspace:
-          # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is
-          # taken to be the root directory of the workspace.
-          root: ./
-          # Must be relative path from root
-          paths:
-            - node_modules
-  test:
-    <<: *defaults
-    steps:
-      - checkout
-      - attach_workspace:
-        # Must be absolute path or relative path from working_directory
-        at: ./
-      - run: yarn test
-  build:
-    <<: *defaults
-    steps:
-      - checkout
-      - attach_workspace:
-        # Must be absolute path or relative path from working_directory
-        at: ./
-      - run: yarn build
-      - persist_to_workspace:
-          root: ./
-          paths:
-            - dist
-  deploy:
-    <<: *defaults
-    steps:
-      - checkout
-      - attach_workspace:
-        # Must be absolute path or relative path from working_directory
-        at: ./
-      - deploy:
-          command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              yarn prod:deploy
-            else
-              yarn test:deploy
+            # Persist the specified paths into workspace for use in downstream job.
+            - persist_to_workspace:
+                # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is
+                # taken to be the root directory of the workspace.
+                root: ./
+                # Must be relative path from root
+                paths:
+                  - node_modules
+    test:
+        <<: *defaults
+        steps:
+            - checkout
+            - attach_workspace:
+                # Must be absolute path or relative path from working_directory
+                at: ./
+            - run: yarn test
+    build:
+      <<: *defaults
+      steps:
+          - checkout
+          - attach_workspace:
+              # Must be absolute path or relative path from working_directory
+              at: ./
+          - run: yarn build
+          - persist_to_workspace:
+              root: ./
+              paths:
+                  - dist
+    deploy:
+      <<: *defaults
+      steps:
+          - checkout
+          - attach_workspace:
+              # Must be absolute path or relative path from working_directory
+              at: ./
+          - deploy:
+              command: |
+                  if [ "${CIRCLE_BRANCH}" == "master" ]; then
+                      yarn prod:deploy
+                  else
+                      yarn test:deploy
 
 
 workflows:
