@@ -84,6 +84,7 @@ workflows:
               only:
                 - develop
                 - master
+                - /features\/.*/
         - test:
           context: org-global
           requires:
@@ -93,6 +94,7 @@ workflows:
               only:
                 - develop
                 - master
+                - /features\/.*/
         - build:
           context: org-global
           requires:
