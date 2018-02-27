@@ -78,13 +78,13 @@ workflows:
   build_and_deploy:
     jobs:
       - install:
-          context: org-global
-          filters:
-            branches:
-              only:
-                - develop
-                - master
-                - /features\/.*/
+        context: org-global
+        filters:
+          branches:
+            only:
+              - develop
+              - master
+              - /features\/.*/
       - test:
         context: org-global
         requires:
