@@ -74,43 +74,24 @@ jobs:
 
 
 workflows:
-  version: 2
-  build_and_deploy:
-    jobs:
-      - install:
-        context: org-global
-        filters:
-          branches:
-            only:
-              - develop
-              - master
-              - /features\/.*/
-      - test:
-        context: org-global
-        requires:
-          - install
-        filters:
-          branches:
-            only:
-              - develop
-              - master
-              - /features\/.*/
-      - build:
-        context: org-global
-        requires:
-          - install
-        filters:
-          branches:
-            only:
-              - develop
-              - master
-      - deploy:
-        context: org-global
-        requires:
-          - test
-          - build
-        filters:
-          branches:
-            only:
-              - develop
-              - master
+    version: 2
+    build_and_deploy:
+        jobs:
+            - install:
+                context: org-global
+                filters:
+                    branches:
+                        only:
+                            - dev
+                            - master
+                            - /features\/.*/
+            - test:
+                context: org-global
+                requires:
+                    - install
+                filters:
+                    branches:
+                        only:
+                            - dev
+                            - master
+                            - /features\/.*/
