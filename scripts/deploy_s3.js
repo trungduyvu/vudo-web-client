@@ -90,6 +90,7 @@ const deploy = async ({ bucket, cloudfrontDist }) => {
       const uploader = s3Client.uploadFile(params);
       uploader.on('error', (uploadError) => {
         console.error('unable to upload:', uploadError.stack);
+        throw uploadError;
       });
       uploader.on('progress', () => {
         console.log(
