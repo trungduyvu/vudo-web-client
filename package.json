@@ -12,7 +12,7 @@
     "precommit": "yarn test",
     "prepush": "yarn precommit",
     "build": "rimraf dist && cross-env NODE_ENV=production webpack -p --progress",
-    "test:deploy": "babel-node scripts/deploy_s3.js vudo-test-web-client-origin E2432QMQ07E6R5"
+    "test:deploy": "babel-node scripts/deploy_s3.js vudo-test-web-client-origin E1CDN0MUO580KB"
   },
   "repository": {
     "type": "git",
