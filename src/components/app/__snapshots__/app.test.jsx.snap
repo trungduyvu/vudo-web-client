@@ -23,7 +23,7 @@ exports[`App component renders correctly 1`] = `
         </li>
         <li>
           <a
-            href="/sign-up"
+            href="/register"
             onClick={[Function]}
           >
             Register

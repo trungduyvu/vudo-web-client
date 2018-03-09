@@ -22,6 +22,7 @@ export default {
   },
   devServer: {
     port: WDS_PORT,
+    historyApiFallback: true,
   },
   plugins: [
     new HtmlWebpackPlugin({

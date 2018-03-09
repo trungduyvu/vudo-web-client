@@ -11,8 +11,8 @@ export default () => (
   <main>
     <Switch>
       <Route exact path="/" component={Home} />
-      <Route path="/sign-in" component={SignIn} />
-      <Route path="/register" component={Register} />
+      <Route exact path="/sign-in" component={SignIn} />
+      <Route exact path="/register" component={Register} />
     </Switch>
   </main>
 );
